@@ -30,6 +30,7 @@ const RegistraionTop = () => {
   
       // レスポンス生成
       const challenge = await getChallenge();
+      console.log("challenge",challenge);
       if (!challenge) {
           console.log("Failed to get challenge");
           return;
@@ -69,7 +70,7 @@ const RegistraionTop = () => {
             {/* QRScannerコンポーネントを呼び出し */}
             <QRScanner onDecode={handleDecode} />
             {/* スキャンしたデータを表示 */}
-            <p>Scanned Data: {scannedData}</p>
+            {/* <p>Scanned Data: {scannedData}</p> */}
         </div>
     )
 }

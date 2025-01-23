@@ -2,12 +2,18 @@ import { BACKEND_URL } from "@/src/config/constants";
 
 export const getChallenge = async (): Promise<string | null> => {
     try{
-        const response = await fetch(BACKEND_URL+"/registration/challenge");
+        const response = await fetch(BACKEND_URL+"/registration/challenge", {
+            headers: new Headers({
+                "ngrok-skip-browser-warning": "69420",
+            }),
+        });
+        console.log("challenge response", response);
         if (!response.ok) {
             console.log("errordayon")
         }
         const data = await response.json();
-        console.log("challenge", data.challenge);
+        console.log("challnge data", data);
+        // console.log("challenge", data.challenge);
         return data.challenge;
     }catch (error) {
         console.log('challenge error', error);
@@ -21,7 +27,10 @@ export const genSignature = async (message: string, signKey: string): Promise<st
     try{
         const response = await fetch('http://localhost:3000/api/sign', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                "ngrok-skip-browser-warning": "69420"
+             },
             body: JSON.stringify({ "message": message, "signKey": signKey }),
         });
         // console.log("sigresponse:\n",response);
@@ -40,6 +49,7 @@ export const sendResponse = async (responseData: unknown, apiPATH: string): Prom
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "ngrok-skip-browser-warning": "69420"
             },
             body: JSON.stringify(responseData),
         });

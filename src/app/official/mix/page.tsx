@@ -6,7 +6,11 @@ import { BACKEND_URL } from "@/src/config/constants";
 
 const MixBallots = () => {
         const handleClick = async () => {
-            await fetch(BACKEND_URL + "/mix/mixBallots"); 
+            await fetch(BACKEND_URL + "/mix/mixBallots", {
+                headers: new Headers({
+                    "ngrok-skip-browser-warning": "69420",
+                }),
+            }); 
         };
 
         return(

@@ -67,7 +67,7 @@ const VotingTop = () => {
             {/* QRScannerコンポーネントを呼び出し */}
             <QRScanner onDecode={handleDecode} />
             {/* スキャンしたデータを表示 */}
-            <p>Scanned Data: {scannedData}</p>
+            {/* <p>Scanned Data: {scannedData}</p> */}
 
         </div>
     )

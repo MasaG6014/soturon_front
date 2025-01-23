@@ -15,7 +15,11 @@ const TallyBallots = () => {
       } 
     const handleClick = async () => {
         try{
-            const response = await fetch(BACKEND_URL+"/tally/tallyBallots");
+            const response = await fetch(BACKEND_URL+"/tally/tallyBallots",{
+                headers: new Headers({
+                    "ngrok-skip-browser-warning": "69420",
+                }),
+            });
             if (!response.ok) {
                 throw new Error("era-dayo");
             }

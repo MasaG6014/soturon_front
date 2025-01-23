@@ -18,7 +18,11 @@ const CheckAuthority = () => {
     // チャレンジを受け取る
     const getChallenge = async () => {
         try{
-            const response = await fetch(BACKEND_URL+"/registration/challenge");
+            const response = await fetch(BACKEND_URL+"/registration/challenge", {
+                headers: new Headers({
+                    "ngrok-skip-browser-warning": "69420",
+                }),
+            });
             if (!response.ok) {
                 console.log("errordayon")
             }
@@ -39,7 +43,8 @@ const CheckAuthority = () => {
     const genSignature = async () => {
         const response = await fetch('http://localhost:3000/api/sign', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json' ,
+                "ngrok-skip-browser-warning": "69420"},
             body: JSON.stringify({ "message": message, "signKey": signKey }),
         });
         // console.log("sigresponse:\n",response);
@@ -58,6 +63,7 @@ const CheckAuthority = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                "ngrok-skip-browser-warning": "69420"
                 },
                 body: JSON.stringify(requestData),
             });
@@ -105,7 +111,7 @@ const CheckAuthority = () => {
             {/* QRScannerコンポーネントを呼び出し */}
             <QRScanner onDecode={handleDecode} />
             {/* スキャンしたデータを表示 */}
-            <p>Scanned Data: {scannedData}</p>
+            {/* <p>Scanned Data: {scannedData}</p> */}
             <p>{status}</p>
         </div>
     )

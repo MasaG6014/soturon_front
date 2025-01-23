@@ -46,7 +46,11 @@ const SelectCandidate = () => {
     // APIを叩いて選択肢を取得
     const fetchOptions = async () => {
       try {
-        const response = await fetch(BACKEND_URL + "/voting/getCandidateList");  // 適切なAPIエンドポイントに変更
+        const response = await fetch(BACKEND_URL + "/voting/getCandidateList", {
+          headers: new Headers({
+                "ngrok-skip-browser-warning": "69420",
+          }),
+        });  // 適切なAPIエンドポイントに変更
         if (!response.ok) {
           throw new Error("Failed to fetch options");
         }
