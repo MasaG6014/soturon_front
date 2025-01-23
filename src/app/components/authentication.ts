@@ -25,7 +25,7 @@ export const getChallenge = async (): Promise<string | null> => {
 
 export const genSignature = async (message: string, signKey: string): Promise<string|null> => {
     try{
-        const response = await fetch('http://localhost:3000/api/sign', {
+        const response = await fetch('https://soturon-front.vercel.app/api/sign', {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
