@@ -9,7 +9,7 @@ import QRScanner from "@/src/app/components/QRScanner";
 const CheckAuthority = () => {
     const router = useRouter();
     const [status, setStatus] = useState<string>("loading...");
-    const [signKey, setSignKeys] = useState<unknown>();
+    // const [signKey, setSignKeys] = useState<unknown>();
     let voterData;
     console.log("voterData", voterData)
     let challenge = 0;
@@ -40,8 +40,8 @@ const CheckAuthority = () => {
     // 署名の生成
     let signature: string = "";
     const message: string = Buffer.from(JSON.stringify(dataToSign)).toString("base64");
-    const genSignature = async () => {
-        const response = await fetch('https://soturon-front.vercel.app/api/sign', {
+    const genSignature = async (signKey: string) => {
+        const response = await fetch('/api/sign', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' ,
                 "ngrok-skip-browser-warning": "69420"},
@@ -85,10 +85,10 @@ const CheckAuthority = () => {
     const handleProcess = async (data: string) => {
         voterData = sessionStorage.getItem("voterData");
         const json_data =JSON.parse(data);
-        setSignKeys(json_data.signKey);
+        const signKey = json_data.signKey;
         console.log(data);
         await getChallenge();
-        await genSignature();
+        await genSignature(signKey);
         await sendResponse();
         sessionStorage.setItem("officialKeys", JSON.stringify(electionData.officialKey));
     };

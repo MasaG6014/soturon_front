@@ -41,7 +41,7 @@ const VotingTop = () => {
           "name":voter.name,
           "Age":voter.Age,
           "Gender":voter.Gender,
-          "pk": voter.verifyKey,
+        //   "pk": voter.verifyKey,
           "challenge": message,
           "signature": signature
       };

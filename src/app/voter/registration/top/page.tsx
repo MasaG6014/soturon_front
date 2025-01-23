@@ -26,6 +26,7 @@ const RegistraionTop = () => {
     
       // 署名の生成
       const signKey = voter.signKey;
+      const verifyKey = voter.verifyKey;
   
       // レスポンス生成
       const challenge = await getChallenge();
@@ -48,6 +49,7 @@ const RegistraionTop = () => {
           "challenge": message,
           "signature": signature
       };
+      console.log("reg top voterData", voterData)
       const isSuccess = await sendResponse(voterData,"/registration/verifyVoter");
       if (isSuccess) {
           setStatus("Success!");
@@ -57,7 +59,15 @@ const RegistraionTop = () => {
           setStatus("Failed");
           console.log("Voter registration failed.");
       }
-      saveData(voterData);
+      saveData({
+        "name":voter.name,
+        "Age":voter.Age,
+        "Gender":voter.Gender,
+        "pk": verifyKey,
+        "challenge": message,
+        "signature": signature
+    });
+      sessionStorage.setItem("voterPk",verifyKey);
       console.log("QR Code:", typeof(data), "\n",data);
     };
 

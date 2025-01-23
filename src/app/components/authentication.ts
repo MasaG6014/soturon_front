@@ -25,13 +25,15 @@ export const getChallenge = async (): Promise<string | null> => {
 
 export const genSignature = async (message: string, signKey: string): Promise<string|null> => {
     try{
-        const response = await fetch('https://soturon-front.vercel.app/api/sign', {
+        const requestData = JSON.stringify({ "message": message, "signKey": signKey });
+        console.log("sig req", requestData);
+        const response = await fetch('/api/sign', {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
                 "ngrok-skip-browser-warning": "69420"
              },
-            body: JSON.stringify({ "message": message, "signKey": signKey }),
+            body: requestData,
         });
         // console.log("sigresponse:\n",response);
         const data = await response.json();
