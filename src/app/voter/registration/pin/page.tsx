@@ -55,7 +55,7 @@ const PINpage = () => {
         // const pk = new ElgamalPlainText(bigInt(electionData.voterInfoList[0].verifyKey));
         // const encPk = new ElgamalCipherText();
         // encPk.encryption(params, keys, pk);
-        const voterPk:string = sessionStorage.getItem("voterPk");
+        const voterPk:string|null = sessionStorage.getItem("voterPk");
         console.log("reg pin pk", voterPk);
         const requestData = {"pk":voterPk , "PIN": ciphers};
         sessionStorage.setItem("pinData", JSON.stringify(requestData));
