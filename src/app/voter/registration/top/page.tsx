@@ -19,10 +19,9 @@ const RegistraionTop = () => {
         return true
     };
 
-    const [scannedData, setScannedData] = useState<string>("No result yet");
 
     const handleDecode = async(data: string) => {
-      setScannedData(data);
+      console.log(data);
       const voter = JSON.parse(data);
     
       // 署名の生成

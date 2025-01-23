@@ -15,11 +15,10 @@ const VotingTop = () => {
         return true
     };
 
-    const [scannedData, setScannedData] = useState<string>("No result yet");
 
     const handleDecode = async(data: string) => {
         console.log("QR Code:", typeof(data), "\n",data);
-      setScannedData(data);
+      console.log(data);
       const voter = JSON.parse(data);
       console.log("voter", voter);
   

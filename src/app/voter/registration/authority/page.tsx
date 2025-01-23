@@ -86,13 +86,12 @@ const CheckAuthority = () => {
         voterData = sessionStorage.getItem("voterData");
         const json_data =JSON.parse(data);
         setSignKeys(json_data.signKey);
-        setScannedData(data);
+        console.log(data);
         await getChallenge();
         await genSignature();
         await sendResponse();
         sessionStorage.setItem("officialKeys", JSON.stringify(electionData.officialKey));
     };
-    const [scannedData, setScannedData] = useState<string>("No result yet");
 
     const handleDecode = async(data: string) => {
         console.log("QR Code:", typeof(data), "\n",data);
