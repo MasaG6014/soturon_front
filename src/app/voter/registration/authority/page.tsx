@@ -41,7 +41,7 @@ const CheckAuthority = () => {
     let signature: string = "";
     const message: string = Buffer.from(JSON.stringify(dataToSign)).toString("base64");
     const genSignature = async () => {
-        const response = await fetch('http://localhost:3000/api/sign', {
+        const response = await fetch('https://soturon-front.vercel.app/api/sign', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' ,
                 "ngrok-skip-browser-warning": "69420"},
