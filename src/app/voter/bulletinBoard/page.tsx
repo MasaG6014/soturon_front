@@ -36,18 +36,18 @@ const BulletinBoard = () => {
     useEffect(() => {getBulletinBoard();},[]);
     return (
         <div className="h-screen flex justify-center items-center"
-        style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+        style={{ display: "flex", flexDirection: "column", gap: "20px", wordWrap: 'break-word', wordBreak:"break-all", width: '100%' }}>
             <h1>すべての票</h1>
             <ul>
                 {Array.isArray(allBallots) && allBallots.map((item, index) => (
-                    <li key={index}> {item}</li>
+                    <li key={index}> {index}: {item}<br /></li>
                 ))}
             </ul>
             {/* <p>{allBallots}</p> */}
             <h1>失効した票</h1>
             <ul>
                 {Array.isArray(revBallots) && revBallots.map((item, index) => (
-                    <li key={index}>{item}</li>
+                    <li key={index}>{item}<br /></li>
                 ))}
             </ul>
             {/* <p>{revBallots}</p> */}
