@@ -1,7 +1,7 @@
 // mixした後、集計作業のリクエストをバックエンドに投げて集計結果を得る
 "use client"
 
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import { BACKEND_URL } from "@/src/config/constants";
 import { useEffect, useState } from "react"
 import electionData from "@/data/electionData.json" ;
