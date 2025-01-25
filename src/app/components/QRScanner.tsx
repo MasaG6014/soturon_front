@@ -8,8 +8,8 @@ type Props = {
 };
 
 const QRScanner: FC<Props> = ({
-  onDecode = (result) => console.log("Scanned QR Code Content:", result),
-  loading = <p>Loading camera...</p>,
+  onDecode = (result) => console.log("", result),
+  loading = <p>カメラを起動しています</p>,
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const qrScannerRef = useRef<QrScanner | null>(null);
@@ -23,6 +23,7 @@ const QRScanner: FC<Props> = ({
           onDecode(result.data);
         },
         {
+          maxScansPerSecond: 2,
           returnDetailedScanResult: true,
           highlightScanRegion: true,
           highlightCodeOutline: true,

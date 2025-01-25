@@ -54,10 +54,9 @@ const RegistraionTop = () => {
       if (isSuccess) {
           setStatus("成功しました");
           console.log("Voter registration successful!");
-          router.push("/voter/registration/authority")
-      }
-      else {
-          setStatus("問題が生じました。\nすでに登録していないか\nQRコードが正しいか確認してください。");
+          router.push("/voter/registration/pin")
+      } else {
+        setStatus("問題が生じました。\nすでに登録していないか\nQRコードが正しいか確認してください。");
           console.log("Voter registration failed.");
       }
       saveData({
@@ -78,7 +77,7 @@ const RegistraionTop = () => {
             <p>{status}</p>
             <h1>お持ちのQRコードをスキャンしてください</h1>
             {/* QRScannerコンポーネントを呼び出し */}
-            <QRScanner onDecode={handleDecode}/>
+            <QRScanner onDecode={handleDecode} />
             {/* スキャンしたデータを表示 */}
             {/* <p>Scanned Data: {scannedData}</p> */}
         </div>

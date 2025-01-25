@@ -8,7 +8,7 @@ import QRScanner from "@/src/app/components/QRScanner";
 
 const CheckAuthority = () => {
     const router = useRouter();
-    const [status, setStatus] = useState<string>("loading...");
+    const [status, setStatus] = useState<string>("認証が成功しました！\nこの画面を職員にお見せください。");
     // const [signKey, setSignKeys] = useState<unknown>();
     let voterData;
     console.log("voterData", voterData)
