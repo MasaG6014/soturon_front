@@ -23,7 +23,7 @@ const QRScanner: FC<Props> = ({
           onDecode(result.data);
         },
         {
-          maxScansPerSecond: 2,
+          maxScansPerSecond: 1,
           returnDetailedScanResult: true,
           highlightScanRegion: true,
           highlightCodeOutline: true,

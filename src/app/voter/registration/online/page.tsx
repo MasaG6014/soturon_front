@@ -76,6 +76,7 @@ const RegistraionTop = () => {
         style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
             <p>{status}</p>
             <h1>お持ちのQRコードをスキャンしてください</h1>
+            <p>カメラが表示されない場合はページをリロードしてください</p>
             {/* QRScannerコンポーネントを呼び出し */}
             <QRScanner onDecode={handleDecode} />
             {/* スキャンしたデータを表示 */}

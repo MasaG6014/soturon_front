@@ -42,8 +42,7 @@ const SelectCandidate = () => {
     const form = useForm<z.infer<typeof FormSchema>>({
       resolver: zodResolver(FormSchema),
     });
-  useEffect(() => {
-    // APIを叩いて選択肢を取得
+  
     const fetchOptions = async () => {
       try {
         const response = await fetch(BACKEND_URL + "/voting/getCandidateList", {
@@ -55,10 +54,10 @@ const SelectCandidate = () => {
           throw new Error("Failed to fetch options");
         }
         const data = await response.json();
-        console.log(data.candidateList);
+        console.log("cand list", data.candidateList);
         const values = data.candidateList.map((candidate:Candidate) => candidate.index);
         setRadioOptions(data.candidateList);  // 取得したデータを状態にセット
-        console.log(values)
+        console.log("values",values)
         setSchemaValue(values);
         console.log(radioOptions);
       } catch (error) {
@@ -66,8 +65,10 @@ const SelectCandidate = () => {
       }
     }
 
+  useEffect(() => {
+    // APIを叩いて選択肢を取得
     fetchOptions();
-  }, [radioOptions]);
+  }, [""]);
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     const params = new Parameters();

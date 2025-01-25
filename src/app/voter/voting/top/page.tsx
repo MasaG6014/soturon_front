@@ -1,13 +1,14 @@
 "use client";
 
 import { genSignature, getChallenge, sendResponse } from "@/src/app/components/authentication";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import QRScanner from "@/src/app/components/QRScanner";
 
 
 const VotingTop = () => {
     const router = useRouter();
+    const [state, setState] = useState<string>("QRコードを読み取ってください");
 
     const saveData = (voterData: unknown):boolean => {
         sessionStorage.setItem("voterData", JSON.stringify({voterData}));
@@ -50,7 +51,8 @@ const VotingTop = () => {
           router.push("/voter/voting/candidate");
           console.log("Voter authentication successful!");
       } else {
-          console.log("Voter authentication failed.");
+          setState("認証に失敗しました");
+          console.log("voter auth fail");
       }
       saveData(voterData);
     };
@@ -58,7 +60,8 @@ const VotingTop = () => {
     return(
         <div className="h-screen flex justify-center items-center"
         style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-            <h1>Scan your QRコード</h1>
+            <h1>認証を行なってください</h1>
+            <p>{state}</p>
             {/* QRScannerコンポーネントを呼び出し */}
             <QRScanner onDecode={handleDecode} />
             {/* スキャンしたデータを表示 */}

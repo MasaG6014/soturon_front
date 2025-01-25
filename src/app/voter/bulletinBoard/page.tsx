@@ -13,7 +13,7 @@ const BulletinBoard = () => {
                 headers: new Headers({
                       "ngrok-skip-browser-warning": "69420",
                 }),
-              })
+              });
             if (!response.ok) {
                 console.log("BB fetch error");
             }

@@ -8,7 +8,7 @@ import QRScanner from "@/src/app/components/QRScanner";
 
 const CheckAuthority = () => {
     const router = useRouter();
-    const [status, setStatus] = useState<string>("認証が成功しました！\nこの画面を職員にお見せください。");
+    const [status, setStatus] = useState<string>("カメラを起動しています");
     // const [signKey, setSignKeys] = useState<unknown>();
     let voterData;
     console.log("voterData", voterData)
@@ -106,7 +106,8 @@ const CheckAuthority = () => {
     return (
         <div className="h-screen flex justify-center items-center"
         style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-            <h1>Read Officials QR ode</h1>
+            <h1>認証が成功しました！この画面を職員にお見せください。</h1>
+            <p>カメラが表示されない場合はページをリロードしてください</p>
             {/* QRScannerコンポーネントを呼び出し */}
             <QRScanner onDecode={handleDecode} />
             {/* スキャンしたデータを表示 */}

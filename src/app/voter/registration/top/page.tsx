@@ -57,7 +57,7 @@ const RegistraionTop = () => {
           router.push("/voter/registration/authority")
       }
       else {
-          setStatus("問題が生じました。\nすでに登録していないか\nQRコードが正しいか確認してください。");
+          setStatus("問題が生じました。\nリロードしても上手くいかない場合、すでに登録していないか、QRコードが正しいか確認してください。");
           console.log("Voter registration failed.");
       }
       saveData({
@@ -77,6 +77,7 @@ const RegistraionTop = () => {
         style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
             <p>{status}</p>
             <h1>お持ちのQRコードをスキャンしてください</h1>
+            <p>カメラが表示されない場合はページをリロードしてください</p>
             {/* QRScannerコンポーネントを呼び出し */}
             <QRScanner onDecode={handleDecode}/>
             {/* スキャンしたデータを表示 */}
