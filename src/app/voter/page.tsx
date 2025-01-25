@@ -17,6 +17,16 @@ const VoterTop = () => {
             <Button asChild variant="blue">
             <Link href="/voter/voting/top">投票する</Link>
             </Button>
+
+            <Button asChild variant="outline">
+            <Link href="/voter/bulletinBoard">投票掲示板</Link>
+            </Button>
+
+
+            <Button asChild variant="destructive">
+            <Link href="/voter/result">選挙結果</Link>
+            </Button>
+
             
         </div>
     )
