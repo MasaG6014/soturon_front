@@ -5,6 +5,8 @@
 import { BACKEND_URL } from "@/src/config/constants";
 import { useEffect, useState } from "react"
 import electionData from "@/data/electionData.json" ;
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const TallyResult = () => {
     const [done, setDone] = useState<string>("結果の取得中");
@@ -68,11 +70,17 @@ const TallyResult = () => {
         <div  className="h-screen flex justify-center items-center"
         style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
             <h1>{done}</h1>
+
             {result.map(candidate => (
                 <p key={candidate.id}>
                     {candidate.name}: {candidate.votes}
                 </p>
             ))}
+
+            <Button asChild variant="destructive">
+            <Link href="/voter">トップページに戻る</Link>
+            </Button>
+
         </div>
     )
 }

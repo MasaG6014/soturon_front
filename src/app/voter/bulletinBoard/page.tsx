@@ -1,6 +1,8 @@
 "use client"
 
+import { Button } from "@/components/ui/button";
 import { BACKEND_URL } from "@/src/config/constants";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const BulletinBoard = () => {
@@ -37,6 +39,10 @@ const BulletinBoard = () => {
     return (
         <div className="h-screen flex justify-center items-center"
         style={{ display: "flex", flexDirection: "column", gap: "20px", wordWrap: 'break-word', wordBreak:"break-all", width: '100%' }}>
+
+            <Button asChild variant="destructive">
+            <Link href="/voter">トップページに戻る</Link>
+            </Button>
             <h1>すべての票</h1>
             <ul>
                 {Array.isArray(allBallots) && allBallots.map((item, index) => (
