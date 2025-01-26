@@ -19,6 +19,7 @@ const CheckInfo = () => {
         // console.log(ballot)
     },[]);
     const handleSubmit = async() => {
+        console.log("vot cki ballot", ballot);
         try {
             // console.log(JSON.parse(ballot));
             const response = await fetch(BACKEND_URL+"/voting/submitBallot",{
@@ -30,9 +31,12 @@ const CheckInfo = () => {
                 body: ballot});
 
             const data = await response.json();
-            console.log(data)
+            console.log(data.status)
 
             if(data.status == "success") {
+                router.push("/voter/voting/complete");
+            }
+            if(data.status == "coerced") {
                 router.push("/voter/voting/complete");
             }
         }catch (error) {

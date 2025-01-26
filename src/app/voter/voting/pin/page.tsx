@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input"
 import { ElgamalCipherText, ElgamalKeys, ElgamalPlainText, Parameters } from "@/src/app/tools/myPrimitives/elgamal";
 import bigInt from "big-integer";
 import { useRouter } from "next/navigation";
+import { BACKEND_URL } from "@/src/config/constants";
 
 
 
@@ -38,15 +39,44 @@ const PINpage = () => {
   })
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     try{
+        // 公開鍵とPINの正しい組み合わせがデータベースに存在するかといあわせ
         // PINの暗号化
+        const voterData = sessionStorage.getItem("voterData");
+        console.log("votin pin vD", voterData);
+        let pk;
+        if (typeof(voterData) == "string") {
+          pk = JSON.parse(voterData).voterData.pk;
+        }
+        console.log("voting pin pk", pk);
+        const reqData =JSON.stringify({
+          "pk": pk,
+          "pin": values.PIN
+        })
+        console.log("votin pin reqdata",reqData);
+        const pinExistanceResponse = await fetch(BACKEND_URL+"/voting/PINexistance",{
+              method:"POST",
+              headers: {
+                  "Content-Type": "application/json",
+              "ngrok-skip-browser-warning": "69420"
+              },
+              body: reqData,
+        }
+        );
+        if (!pinExistanceResponse.ok) {
+          console.log("votin pin exs err")
+        }
+        const pinExistance = await pinExistanceResponse.json();
         const params = new Parameters();
         params.setParams(electionData.election_vars.parameters);
         const keys = new ElgamalKeys();
         keys.setKeys(electionData.election_vars.authKeys);
+        const tallyKeys = new ElgamalKeys();
+        tallyKeys.setKeys(electionData.election_vars.tallyKeys);
+
         const pin = new ElgamalPlainText(bigInt(values.PIN));
         const encPIN = new ElgamalCipherText();
         encPIN.encryption(params,keys,pin);
@@ -59,11 +89,22 @@ const PINpage = () => {
         if (typeof(storageData) == "string"){
           encCandidate = JSON.parse(storageData).encCandidate;
         }
-        const ballot = {
-            pk: electionData.voterInfoList[0].verifyKey,
+
+        console.log("pin exes", pinExistance)
+        
+        if(pinExistance.status == "no") {
+          const zero = new ElgamalCipherText();
+          encCandidate = zero.encryption(params, tallyKeys, new ElgamalPlainText(bigInt(1)));
+        }
+        console.log("enccandidate", encCandidate);
+        let  ballot;
+        if (typeof(voterData) == "string"){
+        ballot = {
+            pk: pk,
             pin: encPIN.ctxt,
             candidate: encCandidate.ctxt
-        };
+        };}
+        console.log("voting pin ballot ",ballot);
         // sessionStorage.setItem("encPIN", JSON.stringify(ciphers));
         sessionStorage.setItem("ballot", JSON.stringify(ballot));
         router.push("/voter/voting/checkinfo");
