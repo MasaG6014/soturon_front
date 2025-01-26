@@ -7,6 +7,7 @@ import { useState } from "react"
 import electionData from "@/data/electionData.json" ;
 
 const TallyBallots = () => {
+    const [done, setDone] = useState<string>("結果の取得中");
     const[result, setResult] = useState<Candidate[]>([]);
     interface Candidate {
         id: string;
@@ -24,6 +25,10 @@ const TallyBallots = () => {
                 throw new Error("era-dayo");
             }
             const data = await response.json();
+            console.log("res data", data);
+            if (data.status == "yet") {
+                setDone("まだミックスが終わっていません")
+            }{
             const candidateList = electionData.candidateList;
             const electionResult: Candidate[] = []; // 候補者のリスト
             candidateList.map(item => {
@@ -45,7 +50,7 @@ const TallyBallots = () => {
                 }
             }
             console.log(electionResult)
-            setResult(electionResult);
+            setResult(electionResult);}
             console.log(data);
         } catch (error) {
             console.log("tally error desu", error);
@@ -55,8 +60,8 @@ const TallyBallots = () => {
     return(
         <div  className="h-screen flex justify-center items-center"
         style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-            <h1>election result</h1>
-
+            <h1>選挙結果</h1>
+            <p>{done}</p>
             {result.map(candidate => (
                 <p key={candidate.id}>
                     {candidate.name}: {candidate.votes}

@@ -84,15 +84,15 @@ const PINpage = () => {
             name="PIN"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>PIN code</FormLabel>
+                <FormLabel>PINコードを入力してください</FormLabel>
                 <FormControl>
-                  <Input placeholder="input PIN code" {...field} />
+                  <Input placeholder="PINコードを入力" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Button type="submit">次へ</Button>
         </form>
       </Form>
     </div>

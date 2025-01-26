@@ -107,7 +107,7 @@ const PINpage = () => {
               <FormItem>
                 <FormLabel>PINコードを入力してください</FormLabel>
                 <FormControl>
-                  <Input placeholder="PINコード" {...field} />
+                  <Input placeholder="半角数字のみ" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

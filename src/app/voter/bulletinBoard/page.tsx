@@ -38,7 +38,9 @@ const BulletinBoard = () => {
     useEffect(() => {getBulletinBoard();},[]);
     return (
         <div className="h-screen flex justify-center items-center"
-        style={{ display: "flex", flexDirection: "column", gap: "20px", wordWrap: 'break-word', wordBreak:"break-all", width: '100%' }}>
+        style={{ display: "flex", flexDirection: "column", gap: "20px"
+            , wordWrap: 'break-word', wordBreak:"break-all", width: '80%', margin:"0 auto"
+        }}>
 
             <Button asChild variant="destructive">
             <Link href="/voter">トップページに戻る</Link>

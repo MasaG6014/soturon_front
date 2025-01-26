@@ -8,8 +8,14 @@ import React, { useEffect, useState } from "react";
 const CheckInfo = () => {
     const router = useRouter();
     const [ballot, setBallot] = useState<string | null>("");
+    const [dispBallot, setDispBallot] = useState<string | null>("");
     useEffect(() => {
-        setBallot(sessionStorage.getItem("ballot"));
+        const sessionBallot = sessionStorage.getItem("ballot");
+        setBallot(sessionBallot);
+        if (sessionBallot != null){
+            const ballotInfo = JSON.parse(sessionBallot);
+            setDispBallot(ballotInfo.candidate);
+        }
         // console.log(ballot)
     },[]);
     const handleSubmit = async() => {
@@ -35,10 +41,11 @@ const CheckInfo = () => {
     }
     return(
         <div className="h-screen flex justify-center items-center"
-        style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-            <h1>this is your ballot</h1>
-            <p>{ballot}</p>
-            <Button onClick={handleSubmit}>submit</Button>
+        style={{ display: "flex", flexDirection: "column", gap: "20px"
+        , wordWrap: 'break-word', wordBreak:"break-all", width: '80%', margin:"0 auto"}}>
+            <h1>票を控えてください</h1>
+            <p>{dispBallot}</p>
+            <Button onClick={handleSubmit}>提出</Button>
         </div>
     )
 };

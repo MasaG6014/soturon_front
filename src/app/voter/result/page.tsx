@@ -28,7 +28,7 @@ const TallyResult = () => {
             }
             const data = await response.json();
             console.log("res data", data);
-            if (Object.keys( data.result).length == 0) {
+            if (data.status == "yet") {
                 setDone("まだ集計が終わっていません")
             }
             else {

@@ -29,7 +29,7 @@ const MixBallots = () => {
     return(
         <div  className="h-screen flex justify-center items-center"
         style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-            <h1>test page</h1>
+            <h1>票のミックス</h1>
             <p>{status}</p>
             <Button onClick={handleClick}>mix</Button>
         </div>

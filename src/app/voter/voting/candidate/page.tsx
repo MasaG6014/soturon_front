@@ -92,7 +92,7 @@ const SelectCandidate = () => {
             name="type"
             render={({ field }) => (
               <FormItem className="space-y-3">
-                <FormLabel>Notify me about...</FormLabel>
+                <FormLabel>候補者を選択してください</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
@@ -118,7 +118,7 @@ const SelectCandidate = () => {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Button type="submit">選択する</Button>
         </form>
       </Form>
     </div>
